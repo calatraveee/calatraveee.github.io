@@ -1,0 +1,36 @@
+/* 导航栏毛玻璃 */
+#nav {
+  background: rgba(255, 255, 255, 0.15) !important;
+  backdrop-filter: blur(10px) !important;
+  -webkit-backdrop-filter: blur(10px) !important;
+}
+
+/* 文章卡片透明 */
+.card-widget,
+#recent-posts .recent-post-item {
+  background: rgba(255, 255, 255, 0.75) !important;
+  backdrop-filter: blur(8px) !important;
+  -webkit-backdrop-filter: blur(8px) !important;
+}
+
+.avatar-img,
+img.avatar-img,
+#aside-content img {
+  animation: none !important;
+  -webkit-animation: none !important;
+  transform: scale(1);
+  transition: transform 0.4s ease, box-shadow 0.4s ease !important;
+  border-radius: 50%;
+}
+
+.avatar-img:hover,
+img.avatar-img:hover {
+  animation: breathe 1.8s ease-in-out infinite !important;
+  filter: none !important;
+}
+
+@keyframes breathe {
+  0%   { transform: scale(1.06); box-shadow: 0 0 8px 4px rgba(255,255,255,0.3); }
+  50%  { transform: scale(1.12); box-shadow: 0 0 20px 10px rgba(255,255,255,0.6); }
+  100% { transform: scale(1.06); box-shadow: 0 0 8px 4px rgba(255,255,255,0.3); }
+}
