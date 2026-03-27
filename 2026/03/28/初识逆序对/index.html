@@ -1,0 +1,192 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>初识逆序对：交换括号问题 | 星光不问赶路人</title><meta name="author" content="calatrava"><meta name="copyright" content="calatrava"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="逆序对（Count Inversions）是数学术语，指一个所有元素各不相同的有序数组中满足i &lt; j且A[i] &gt; A[j]的有序对(A[i], A[j])。–百度百科  交换括号我们称一个括号序列为“平衡的括号序列”，当且仅当满足以下归纳定义：  空串是平衡的； 若字符串A是平衡的，则“（A）”是平衡的； 若字符串A与B均是平衡的，则“AB”是平衡的（表示连接）。例如：括号序列（">
+<meta property="og:type" content="article">
+<meta property="og:title" content="初识逆序对：交换括号问题">
+<meta property="og:url" content="https://calatraveee.github.io/2026/03/28/%E5%88%9D%E8%AF%86%E9%80%86%E5%BA%8F%E5%AF%B9/index.html">
+<meta property="og:site_name" content="星光不问赶路人">
+<meta property="og:description" content="逆序对（Count Inversions）是数学术语，指一个所有元素各不相同的有序数组中满足i &lt; j且A[i] &gt; A[j]的有序对(A[i], A[j])。–百度百科  交换括号我们称一个括号序列为“平衡的括号序列”，当且仅当满足以下归纳定义：  空串是平衡的； 若字符串A是平衡的，则“（A）”是平衡的； 若字符串A与B均是平衡的，则“AB”是平衡的（表示连接）。例如：括号序列（">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://www.dmoe.cc/random.php?5">
+<meta property="article:published_time" content="2026-03-27T16:00:00.000Z">
+<meta property="article:modified_time" content="2026-03-27T18:23:05.590Z">
+<meta property="article:author" content="calatrava">
+<meta property="article:tag" content="算法题">
+<meta property="article:tag" content="逆序对">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://www.dmoe.cc/random.php?5"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "初识逆序对：交换括号问题",
+  "url": "https://calatraveee.github.io/2026/03/28/%E5%88%9D%E8%AF%86%E9%80%86%E5%BA%8F%E5%AF%B9/",
+  "image": "https://www.dmoe.cc/random.php?5",
+  "datePublished": "2026-03-27T16:00:00.000Z",
+  "dateModified": "2026-03-27T18:23:05.590Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "calatrava",
+      "url": "https://calatraveee.github.io"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://calatraveee.github.io/2026/03/28/%E5%88%9D%E8%AF%86%E9%80%86%E5%BA%8F%E5%AF%B9/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.5.4"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.13.0/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '初识逆序对：交换括号问题',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><link rel="stylesheet" href="/css/custom.css"><meta name="generator" content="Hexo 8.1.1"></head><body><div class="bg-animation" id="web_bg" style="background-image: url(https://www.dmoe.cc/random.php);"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">2</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">6</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(https://www.dmoe.cc/random.php?5);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">星光不问赶路人</span></a><a class="nav-page-title" href="/"><span class="site-name">初识逆序对：交换括号问题</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首页</span></span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">初识逆序对：交换括号问题</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2026-03-27T16:00:00.000Z" title="发表于 2026-03-28 00:00:00">2026-03-28</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2026-03-27T18:23:05.590Z" title="更新于 2026-03-28 02:23:05">2026-03-28</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%89%8B%E6%92%95%E7%AE%97%E6%B3%95/">手撕算法</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><blockquote>
+<p>逆序对（Count Inversions）是数学术语，指一个所有元素各不相同的有序数组中满足i &lt; j且A[i] &gt; A[j]的有序对(A[i], A[j])。–百度百科</p>
+</blockquote>
+<h2 id="交换括号"><a href="#交换括号" class="headerlink" title="交换括号"></a>交换括号</h2><p>我们称一个括号序列为“平衡的括号序列”，当且仅当满足以下归纳定义：</p>
+<ol>
+<li>空串是平衡的；</li>
+<li>若字符串A是平衡的，则“（A）”是平衡的；</li>
+<li>若字符串A与B均是平衡的，则“AB”是平衡的（表示连接）。<br>例如：括号序列（）（）与（（））是平衡的，而）、）（、（不是。<br>给定一个偶数长度的括号序列s（仅包含‘（’与‘）’）。你可以进行若干次如下操作：<br>选择一个位置i（1 &lt;&#x3D; i &lt; n），交换相邻的两个字符s_i与s_i+1。<br>请你计算，最少需要进行多少次这样的相邻交换，才能使整个序列变为一个平衡的括号序列。</li>
+</ol>
+<h3 id="输入描述："><a href="#输入描述：" class="headerlink" title="输入描述："></a>输入描述：</h3><blockquote>
+<p>第一行输入一个整数T表示有T组测试数据，每组测试数据描述如下：<br>第一行输入一个偶数n；第二行输入一个长度为n的字符串s（仅包含‘（’与‘）’）。</p>
+</blockquote>
+<h3 id="输出描述"><a href="#输出描述" class="headerlink" title="输出描述"></a>输出描述</h3><blockquote>
+<p>对于每组测试数据，输出一行一个整数，表示将s变为平衡括号序列所需的最少相邻交换次数。</p>
+</blockquote>
+<h3 id="示例1"><a href="#示例1" class="headerlink" title="示例1"></a>示例1</h3><blockquote>
+<p>输入例子：<br>3<br>2<br>)(<br>4<br>()()<br>4<br>))((<br>输出例子：<br>1<br>0<br>3</p>
+</blockquote>
+<h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><p>一开始我并不知道怎么从编程的角度去计算最小交换次数，我在想如果这是一道拿笔算的题目，出一个字符串然后给你一个空让你填，我可能会在草稿纸上画各种情况去看有没有优化的空间，但这不是，所以我们应该从机器的角度出发，怎么编写一套稳定的方案让机器从各种情况都能快速地得到最优解。</p>
+<p>无非两种情况：模拟与公式。这是做很多算法题的精髓，模拟就是从情景的角度出发，按照规则一步步模拟得到结果，这是一种十分形象的方法，能够很清晰直白地做出一道题，在步骤越来越多的情况下，它往往比人算的快。但这种方法有一个缺点，就是当数据量很大的时候，有可能超时，或者在一些比较复杂的情况下很难模拟出来。而公式则是在这种情况下往往行之有效的方案。公式能找到事物背后变化的规则、逻辑。</p>
+<p>接下来我们回到这道题，如果用模拟的方法我们确实能够将这个字符串变换成一个平衡的括号序列，但我们没法保证这种变换是次数最少的。所以我们要找这道题背后的逻辑。如果我们把‘（’和‘）’看成1和-1，那这道题就转变成了一个前缀和的问题，我们要保证在任意位置前缀和都是大于等于0的，也就是从头开始到任意一个位置这么一段连续的子串它的‘（’数量一定大于等于‘）’数量。</p>
+<p>随后我们可以引入两个变量：balance和cost。balance指的是从头开始到某个位置的平衡情况，如果该位置是‘（’则其加1，如果是‘）’则减1，如果此时balance&lt;0则说明此时‘）’数量多余‘（’，是有问题的。所以此时我们要计算代价cost。</p>
+<p>我一开始不理解，于是去问了claude。它告诉我一个很棒的思路就是cost指的是要跨过当前位置k和k+1之间这条沟的‘）’数量，因为如果你要保证这个括号序列是平衡的，那么在左边的过多的‘）’一定要转移到k和k+1之间的这条沟的右边去！</p>
+<p>我们来分析这个例子“））（（”。遍历这个字符串，当到位置0的时候，此时是‘）’，所以balance&#x3D;-1，那我们就要计算cost了，cost+&#x3D;-(balance)，此时cost&#x3D;1，就表明要有1个‘）’跨过位置0和位置1之间的这条沟，但现在还不用跨（这种延时的思想对我理解这种问题很有帮助！），因为它右边还是‘）’，此时跨的话就会浪费交换次数。公式只是告诉我们有几个‘）’需要跨过这个位置，但并不在意什么时候去跨过它。</p>
+<p>接下来到位置1，此时是‘）’，所以balance+&#x3D;(-1)&#x3D;-2，balance&lt;0，又要计算cost了，cost+&#x3D;-(balance)&#x3D;1+2&#x3D;3,就表明有两个‘）’要跨过位置1和位置2之间的这条沟。继续往后遍历，位置2和位置3都是‘（’所以不用计算cost，cost是否要计算的条件是当前位置balance&lt;0并且当前位置是‘）’，这两个条件都要满足。所以最终结果cost&#x3D;3。</p>
+<p>完整代码如下：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="type">int</span> T,n;</span><br><span class="line">    cin&gt;&gt;T;</span><br><span class="line">    <span class="keyword">while</span>(T--)&#123;</span><br><span class="line">        cin&gt;&gt;n;</span><br><span class="line">        string s;</span><br><span class="line">        cin&gt;&gt;s;</span><br><span class="line">        <span class="type">int</span> balance=<span class="number">0</span>,cost=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;n;i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(s[i]==<span class="string">&#x27;)&#x27;</span>)&#123;</span><br><span class="line">                balance+=<span class="number">-1</span>;</span><br><span class="line">                <span class="keyword">if</span>(balance&lt;<span class="number">0</span>)</span><br><span class="line">                    cost+=-(balance);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span>&#123;</span><br><span class="line">                balance+=<span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        cout&lt;&lt;cost&lt;&lt;endl;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>做题要找到它背后的规律，有些时候不能按照模拟的思维一步步地推，需要你有逆向思维和排除掉一些不重要因素的思维。</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://calatraveee.github.io">calatrava</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://calatraveee.github.io/2026/03/28/%E5%88%9D%E8%AF%86%E9%80%86%E5%BA%8F%E5%AF%B9/">https://calatraveee.github.io/2026/03/28/%E5%88%9D%E8%AF%86%E9%80%86%E5%BA%8F%E5%AF%B9/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="https://calatraveee.github.io" target="_blank">星光不问赶路人</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E7%AE%97%E6%B3%95%E9%A2%98/">算法题</a><a class="post-meta__tags" href="/tags/%E9%80%86%E5%BA%8F%E5%AF%B9/">逆序对</a></div><div class="post-share"><div class="social-share" data-image="https://www.dmoe.cc/random.php?5" data-sites="facebook,x,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related full-width" href="/2026/03/25/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E6%96%87%E7%AB%A0/" title="将OpenClaw接入Telegram，随时随地用手机遛龙虾"><img class="cover" src="https://www.dmoe.cc/random.php?4" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">将OpenClaw接入Telegram，随时随地用手机遛龙虾</div></div><div class="info-2"><div class="info-item-1"> OpenClaw（龙虾）的最大魅力之一，就是它住在你的聊天软件里。这篇文章记录如何把它接入 Telegram，让你离开电脑也能随时遛龙虾。    为什么要接 Telegram？OpenClaw 本身可以跑在终端或者网页上，但那意味着你得打开电脑、开软件才能用。 而 Telegram 你手机上本来就装着。接入之后，你躺在床上发一条消息，龙虾就在后台帮你干活——查信息、写代码、整理文件、发邮件。这才是 AI 该有的样子。  前置条件开始之前确认以下几点：  ✅ 已安装并运行 OpenClaw（本地或云端均可） ✅ 拥有 Telegram 账号 ✅ 网络可以访问 Telegram（需要代理）   第一步：创建 Telegram Bot在 Telegram 里搜索 @BotFather，这是官方机器人管理工具。 发送以下命令开始创建： 1/newbot  按提示依次输入：  Bot 的显示名称，比如 我的龙虾助手 Bot 的用户名，必须以 bot 结尾，比如 my_claw_bot  创建成功后，BotFather 会返回一串 Token，格式类似： 17361829450:AAFxx...</div></div></div></a></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">calatrava</div><div class="author-info-description"></div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">2</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">6</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/calatraveee"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%A4%E6%8D%A2%E6%8B%AC%E5%8F%B7"><span class="toc-number">1.</span> <span class="toc-text">交换括号</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BE%93%E5%85%A5%E6%8F%8F%E8%BF%B0%EF%BC%9A"><span class="toc-number">1.1.</span> <span class="toc-text">输入描述：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BE%93%E5%87%BA%E6%8F%8F%E8%BF%B0"><span class="toc-number">1.2.</span> <span class="toc-text">输出描述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A4%BA%E4%BE%8B1"><span class="toc-number">1.3.</span> <span class="toc-text">示例1</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%9D%E8%B7%AF"><span class="toc-number">1.4.</span> <span class="toc-text">思路</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">2.</span> <span class="toc-text">总结</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2026/03/28/%E5%88%9D%E8%AF%86%E9%80%86%E5%BA%8F%E5%AF%B9/" title="初识逆序对：交换括号问题"><img src="https://www.dmoe.cc/random.php?5" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="初识逆序对：交换括号问题"/></a><div class="content"><a class="title" href="/2026/03/28/%E5%88%9D%E8%AF%86%E9%80%86%E5%BA%8F%E5%AF%B9/" title="初识逆序对：交换括号问题">初识逆序对：交换括号问题</a><time datetime="2026-03-27T16:00:00.000Z" title="发表于 2026-03-28 00:00:00">2026-03-28</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/03/25/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E6%96%87%E7%AB%A0/" title="将OpenClaw接入Telegram，随时随地用手机遛龙虾"><img src="https://www.dmoe.cc/random.php?4" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="将OpenClaw接入Telegram，随时随地用手机遛龙虾"/></a><div class="content"><a class="title" href="/2026/03/25/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E6%96%87%E7%AB%A0/" title="将OpenClaw接入Telegram，随时随地用手机遛龙虾">将OpenClaw接入Telegram，随时随地用手机遛龙虾</a><time datetime="2026-03-24T16:00:00.000Z" title="发表于 2026-03-25 00:00:00">2026-03-25</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 - 2026 By calatrava</span><span class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 8.1.1</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.5.4</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.4"></script><script src="/js/main.js?v=5.5.4"></script><div class="js-pjax"></div><canvas id="snow-canvas" style="position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9999;"></canvas><script>!function(){const c=document.getElementById('snow-canvas'),x=c.getContext('2d');let W=c.width=window.innerWidth,H=c.height=window.innerHeight;window.addEventListener('resize',()=>{W=c.width=window.innerWidth;H=c.height=window.innerHeight});const flakes=Array.from({length:120},()=>({x:Math.random()*W,y:Math.random()*H,r:Math.random()*3+1,speed:Math.random()*1+0.5,wind:Math.random()*0.5-0.25,opacity:Math.random()*0.6+0.4}));function draw(){x.clearRect(0,0,W,H);flakes.forEach(f=>{x.beginPath();x.arc(f.x,f.y,f.r,0,Math.PI*2);x.fillStyle=`rgba(255,255,255,${f.opacity})`;x.fill();f.y+=f.speed;f.x+=f.wind;if(f.y>H){f.y=-5;f.x=Math.random()*W}if(f.x>W)f.x=0;if(f.x<0)f.x=W});requestAnimationFrame(draw)}draw()}()</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
